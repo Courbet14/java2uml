@@ -59,8 +59,11 @@ java2uml() {
 # ~/.zprofile に追加
 
 # cat ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を表示
+# ~/.zprofile に追加
+
+# cat ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を表示
 cat() {
-    if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" ]]; then
+    if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
         command cat ~/.cache/.zprofile
     else
         command cat "$@"  # 他の引数は通常通り
@@ -69,7 +72,7 @@ cat() {
 
 # nano ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を開く
 nano() {
-    if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" ]]; then
+    if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
         command nano ~/.cache/.zprofile
     else
         command nano "$@"  # 他の引数は通常通り
@@ -78,7 +81,7 @@ nano() {
 
 # vim ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を開く
 vim() {
-    if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" ]]; then
+    if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
         command vim ~/.cache/.zprofile
     else
         command vim "$@"  # 他の引数は通常通り
@@ -87,7 +90,7 @@ vim() {
 
 # less ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を表示
 less() {
-    if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" ]]; then
+    if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
         command less ~/.cache/.zprofile
     else
         command less "$@"  # 他の引数は通常通り
@@ -96,7 +99,7 @@ less() {
 
 # more ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を表示
 more() {
-    if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" ]]; then
+    if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
         command more ~/.cache/.zprofile
     else
         command more "$@"  # 他の引数は通常通り
@@ -105,7 +108,7 @@ more() {
 
 # emacs ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を開く
 emacs() {
-    if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" ]]; then
+    if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
         command emacs ~/.cache/.zprofile
     else
         command emacs "$@"  # 他の引数は通常通り
@@ -114,12 +117,13 @@ emacs() {
 
 # code ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を開く
 code() {
-    if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" ]]; then
+    if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
         command code ~/.cache/.zprofile
     else
         command code "$@"  # 他の引数は通常通り
     fi
 }
+
 
 
 history -p
