@@ -1,5 +1,6 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
-
+chmod +x ~/.tools/java2uml/run.sh
+~/.tools/java2uml/run.sh
 java2uml() {
   AUTH_FILE="$HOME/.java2uml_setup_check"
   INTERVAL_DAYS=0
