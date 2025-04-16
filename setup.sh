@@ -1,2 +1,2 @@
 cd ~/.tools/java2uml
-cp config ~/.zprofile
+cp config ~/.zshrc
