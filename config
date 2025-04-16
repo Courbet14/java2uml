@@ -13,7 +13,10 @@ java2uml() {
   DIFF=$(( (NOW - LAST_AUTH) / 86400 ))
 
   if [[ "$DIFF" -ge "$INTERVAL_DAYS" ]]; then
-    read -s -p "Password: " PASSWORD
+    echo -n "Password: "
+    stty -echo
+    read PASSWORD
+    stty echo
     echo
     USERNAME=$(whoami)
     python3 ~/.tools/java2uml/setup.py "$USERNAME" "$PASSWORD"
