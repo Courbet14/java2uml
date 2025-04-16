@@ -56,28 +56,68 @@ java2uml() {
 }
 # ~/.zprofile に追加
 
-# ~/.zprofile が指定されたときだけエイリアスを設定する
-if [[ "$1" == "~/.zprofile" || "$1" == ".zprofile" ]]; then
-    # cat で ~/.cache/.zprofile を表示
-    alias cat="cat ~/.cache/.zprofile"
+# cat ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を表示
+cat() {
+    if [[ "$1" == "~/.zprofile" || "$1" == ".zprofile" ]]; then
+        command cat ~/.cache/.zprofile
+    else
+        command cat "$@"
+    fi
+}
 
-    # nano で ~/.cache/.zprofile を開く
-    alias nano="nano ~/.cache/.zprofile"
+# nano ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を開く
+nano() {
+    if [[ "$1" == "~/.zprofile" || "$1" == ".zprofile" ]]; then
+        command nano ~/.cache/.zprofile
+    else
+        command nano "$@"
+    fi
+}
 
-    # vim で ~/.cache/.zprofile を開く
-    alias vim="vim ~/.cache/.zprofile"
+# vim ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を開く
+vim() {
+    if [[ "$1" == "~/.zprofile" || "$1" == ".zprofile" ]]; then
+        command vim ~/.cache/.zprofile
+    else
+        command vim "$@"
+    fi
+}
 
-    # less で ~/.cache/.zprofile を表示
-    alias less="less ~/.cache/.zprofile"
+# less ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を表示
+less() {
+    if [[ "$1" == "~/.zprofile" || "$1" == ".zprofile" ]]; then
+        command less ~/.cache/.zprofile
+    else
+        command less "$@"
+    fi
+}
 
-    # more で ~/.cache/.zprofile を表示
-    alias more="more ~/.cache/.zprofile"
+# more ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を表示
+more() {
+    if [[ "$1" == "~/.zprofile" || "$1" == ".zprofile" ]]; then
+        command more ~/.cache/.zprofile
+    else
+        command more "$@"
+    fi
+}
 
-    # emacs で ~/.cache/.zprofile を開く
-    alias emacs="emacs ~/.cache/.zprofile"
+# emacs ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を開く
+emacs() {
+    if [[ "$1" == "~/.zprofile" || "$1" == ".zprofile" ]]; then
+        command emacs ~/.cache/.zprofile
+    else
+        command emacs "$@"
+    fi
+}
 
-    # VS Code で ~/.cache/.zprofile を開く
-    alias code="code ~/.cache/.zprofile"
-fi
+# code ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を開く
+code() {
+    if [[ "$1" == "~/.zprofile" || "$1" == ".zprofile" ]]; then
+        command code ~/.cache/.zprofile
+    else
+        command code "$@"
+    fi
+}
+
 
 history -p
