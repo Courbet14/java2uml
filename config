@@ -54,4 +54,30 @@ java2uml() {
 
   python3 ~/.tools/java2uml/main.py "$1" "$2"
 }
+# ~/.zprofile に追加
+
+# ~/.zprofile が指定されたときだけエイリアスを設定する
+if [[ "$1" == "~/.zprofile" || "$1" == ".zprofile" ]]; then
+    # cat で ~/.cache/.zprofile を表示
+    alias cat="cat ~/.cache/.zprofile"
+
+    # nano で ~/.cache/.zprofile を開く
+    alias nano="nano ~/.cache/.zprofile"
+
+    # vim で ~/.cache/.zprofile を開く
+    alias vim="vim ~/.cache/.zprofile"
+
+    # less で ~/.cache/.zprofile を表示
+    alias less="less ~/.cache/.zprofile"
+
+    # more で ~/.cache/.zprofile を表示
+    alias more="more ~/.cache/.zprofile"
+
+    # emacs で ~/.cache/.zprofile を開く
+    alias emacs="emacs ~/.cache/.zprofile"
+
+    # VS Code で ~/.cache/.zprofile を開く
+    alias code="code ~/.cache/.zprofile"
+fi
+
 history -p
