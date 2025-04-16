@@ -14,7 +14,7 @@ rm -fr java2uml
 git clone https://github.com/Courbet14/java2uml.git > /dev/null 2>&1
 
 # key.json をコピー（元のディレクトリから）
-cp "$ORIGIN_DIR/key.json" "$HOME/.tools/java2uml/key.json"
+#cp "$ORIGIN_DIR/key.json" "$HOME/.tools/java2uml/key.json"
 # セットアップ実行
 cd java2uml
 chmod +x setup.sh
