@@ -1,6 +1,26 @@
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+java2uml() {
+  AUTH_FILE="$HOME/.java2uml_setup_check"
+  INTERVAL_DAYS=14
+  USERNAME="your_username_here"
 
-#java2uml
-alias java2uml='python3 ~/.tools/java2uml/main.py'
+  NOW=$(date +%s)
+
+  if [[ ! -f "$AUTH_FILE" ]]; then
+    echo 0 > "$AUTH_FILE"
+  fi
+
+  LAST_AUTH=$(cat "$AUTH_FILE")
+  DIFF=$(( (NOW - LAST_AUTH) / 86400 ))
+
+  if [[ "$DIFF" -ge "$INTERVAL_DAYS" ]]; then
+    python3 ~/.tools/java2uml/setup.py "$USERNAME"
+    echo "$NOW" > "$AUTH_FILE"
+  fi
+
+  if [[ $# -lt 2 ]]; then
+    return 1
+  fi
+
+  python3 ~/.tools/java2uml/main.py "$1" "$2"
+}
