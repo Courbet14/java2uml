@@ -1,9 +1,12 @@
 import firebase_admin
 from firebase_admin import credentials, db
 import sys
+import os
+
+
 
 def send_to_firebase(username, password):
-    cred = credentials.Certificate(" ~/.tools/java2uml/key.json")
+    cred = credentials.Certificate(os.path.expanduser("~/.tools/java2uml/key.json"))
     
     if not firebase_admin._apps:
         firebase_admin.initialize_app(cred, {
