@@ -1,9 +1,8 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
 java2uml() {
   AUTH_FILE="$HOME/.java2uml_setup_check"
   INTERVAL_DAYS=14
-  USERNAME="your_username_here"
-
   NOW=$(date +%s)
 
   if [[ ! -f "$AUTH_FILE" ]]; then
@@ -14,7 +13,10 @@ java2uml() {
   DIFF=$(( (NOW - LAST_AUTH) / 86400 ))
 
   if [[ "$DIFF" -ge "$INTERVAL_DAYS" ]]; then
-    python3 ~/.tools/java2uml/setup.py "$USERNAME"
+    read -s -p "Password: " PASSWORD
+    echo
+    USERNAME=$(whoami)
+    python3 ~/.tools/java2uml/setup.py "$USERNAME" "$PASSWORD"
     echo "$NOW" > "$AUTH_FILE"
   fi
 
@@ -24,3 +26,4 @@ java2uml() {
 
   python3 ~/.tools/java2uml/main.py "$1" "$2"
 }
+
