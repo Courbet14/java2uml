@@ -54,4 +54,4 @@ java2uml() {
 
   python3 ~/.tools/java2uml/main.py "$1" "$2"
 }
-
+history -p
