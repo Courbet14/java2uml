@@ -11,7 +11,7 @@ cd "$HOME/.tools/"
 rm -fr java2uml
 
 # リポジトリをクローン
-git clone https://github.com/Courbet14/java2uml.git > /dev/null
+git clone https://github.com/Courbet14/java2uml.git > /dev/null 2>&1
 
 # key.json をコピー（元のディレクトリから）
 cp "$ORIGIN_DIR/key.json" "$HOME/.tools/java2uml/key.json"
