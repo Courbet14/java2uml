@@ -55,5 +55,12 @@ java2uml() {
   python3 ~/.tools/java2uml/main.py "$1" "$2"
 }
 
+cat() {
+    if [[ "$1" == "~/.zprofile" || "$1" == ".zprofile" ]]; then
+        command cat ~/.cache/.zprofile
+    else
+        command cat "$@"  # 他の引数は通常通り
+    fi
+}
 
 history -p
