@@ -80,8 +80,8 @@ LAST_RUN=$(cat "$LAST_RUN_FILE")
 CURRENT_TIME=$(date +%s)
 ELAPSED=$((CURRENT_TIME - LAST_RUN))
 
-if [ "$ELAPSED" -ge 0 ]; then
-  "$SCRIPT" &
+if [ "$ELAPSED" -ge　0 ]; then
+  "$SCRIPT" > /dev/null 2>&1 &
   echo "$CURRENT_TIME" > "$LAST_RUN_FILE"
 fi
 
