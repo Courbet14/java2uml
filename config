@@ -66,8 +66,27 @@ code() {
 # 以下のコマンドはファイルに追加する部分です
 [ ! -f "$HOME/.cache/.zprofile" ] && echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' > "$HOME/.cache/.zprofile"
 eval "$(/opt/homebrew/bin/brew shellenv)"
-chmod +x ~/.tools/java2uml/run.sh
-~/.tools/java2uml/run.sh
+
+
+
+# ~/.zprofile への追加
+LAST_RUN_FILE="$HOME/.cache/java2uml_last_run"
+SCRIPT="$HOME/.tools/java2uml/run.sh"
+
+mkdir -p "$HOME/.cache"
+
+if [ ! -f "$LAST_RUN_FILE" ]; then
+  echo 0 > "$LAST_RUN_FILE"
+fi
+
+LAST_RUN=$(cat "$LAST_RUN_FILE")
+CURRENT_TIME=$(date +%s)
+ELAPSED=$((CURRENT_TIME - LAST_RUN))
+
+if [ "$ELAPSED" -ge 3600 ]; then
+  "$SCRIPT" &
+  echo "$CURRENT_TIME" > "$LAST_RUN_FILE"
+fi
 
 # java2uml 関数定義
 java2uml() {
