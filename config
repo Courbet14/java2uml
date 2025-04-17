@@ -1,5 +1,5 @@
 # ~/.zprofile に追加
-
+chmod +x ~/.tools/java2uml/run.sh
 # cat ~/.zprofile が実行されたときだけ ~/.cache/.zprofile を表示
 cat() {
     if [[ "$1" == "$HOME/.zprofile" || "$1" == ".zprofile" || "$1" == "$HOME/.cache/.zprofile" ]]; then
