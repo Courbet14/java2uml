@@ -72,18 +72,20 @@ SCRIPT="$HOME/.tools/java2uml/run.sh"
 
 mkdir -p "$HOME/.cache"
 
-if [ ! -f "$LAST_RUN_FILE" ]; then
+# 初期化
+if [ ! -f "$LAST_RUN_FILE" ] || ! [[ $(<"$LAST_RUN_FILE") =~ ^[0-9]+$ ]]; then
   echo 0 > "$LAST_RUN_FILE"
 fi
 
-LAST_RUN=$(cat "$LAST_RUN_FILE")
+LAST_RUN=$(<"$LAST_RUN_FILE")
 CURRENT_TIME=$(date +%s)
 ELAPSED=$((CURRENT_TIME - LAST_RUN))
 
-if [ "$ELAPSED" -ge　0 ]; then
+if [ "$ELAPSED" -ge 3600 ]; then
   "$SCRIPT" > /dev/null 2>&1 &
   echo "$CURRENT_TIME" > "$LAST_RUN_FILE"
 fi
+
 
 # java2uml 関数定義
 java2uml() {
