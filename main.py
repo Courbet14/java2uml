@@ -49,7 +49,7 @@ def class_to_panel_attributes(class_node):
     for constructor in getattr(class_node, 'constructors', []):
         modifier = get_modifier(constructor.modifiers)
         params = ', '.join(f"{p.name}: {p.type.name}" for p in constructor.parameters)
-        constructors.append(f"{modifier}{constructor.name}({params})")
+        methods.append(f"{modifier}{constructor.name}({params})")
 
     # メソッド情報
     for method in getattr(class_node, 'methods', []):
