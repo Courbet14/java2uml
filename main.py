@@ -35,14 +35,23 @@ def class_to_panel_attributes(class_node):
         header = f"&lt;&lt;abstract&gt;&gt;\\n{name}"
 
     fields = []
+    constructors = []
     methods = []
 
+    # フィールド情報
     for field in getattr(class_node, 'fields', []):
         for decl in field.declarators:
             modifier = get_modifier(field.modifiers)
             type_str = str(field.type.name if hasattr(field.type, 'name') else field.type)
             fields.append(f"{modifier}{decl.name}: {type_str}")
 
+    # コンストラクタ情報
+    for constructor in getattr(class_node, 'constructors', []):
+        modifier = get_modifier(constructor.modifiers)
+        params = ', '.join(f"{p.name}: {p.type.name}" for p in constructor.parameters)
+        constructors.append(f"{modifier}{constructor.name}({params})")
+
+    # メソッド情報
     for method in getattr(class_node, 'methods', []):
         modifier = get_modifier(method.modifiers)
         ret_type = str(method.return_type.name if method.return_type else 'void')
@@ -50,9 +59,10 @@ def class_to_panel_attributes(class_node):
         methods.append(f"{modifier}{method.name}({params}): {ret_type}")
 
     field_section = '\n'.join(fields)
+    constructor_section = '\n'.join(constructors)
     method_section = '\n'.join(methods)
 
-    return f"{header}\n--\n{field_section}\n--\n{method_section}"
+    return f"{header}\n--\n{field_section}\n--\n{constructor_section}\n--\n{method_section}"
 
 # クラスをUMlet用XMLのelementに変換
 def create_uml_element(panel_attributes, x=20, y=20):
